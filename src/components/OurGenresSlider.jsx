@@ -8,6 +8,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const OurGenresSlider = () => {
   const [genres, setGenres] = useState([]);
   const [genreMovies, setGenreMovies] = useState({});
+  const [currentIndex, setCurrentIndex] = useState(0); // Track index for small screens
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -55,11 +56,25 @@ const OurGenresSlider = () => {
     }
   };
 
+  const handleSmallScreenLeft = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleSmallScreenRight = () => {
+    if (currentIndex < genres.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+    }
+  };
+
   return (
     <section className="px-6 py-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-white">Our Genres</h2>
-        <div className="flex items-center space-x-4">
+
+        {/* Navigation for Large Screens */}
+        {/* <div className="hidden md:flex items-center space-x-4">
           <button
             onClick={scrollLeft}
             className="w-12 h-12 bg-black rounded-lg flex justify-center items-center text-white border border-gray-600 hover:border-red-600 transition-all"
@@ -77,13 +92,14 @@ const OurGenresSlider = () => {
           >
             ▶
           </button>
-        </div>
+        </div> */}
       </div>
 
-      <div className="relative">
+      {/* Large Screen Layout */}
+      <div className="relative hidden md:block">
         <div
           ref={sliderRef}
-          className="flex space-x-4 overflow-x-scroll scrollbar-hide scroll-smooth"
+          className="flex space-x-4 overflow-x-auto scrollbar-hide scroll-smooth md:grid md:grid-cols-5"
           style={{
             scrollBehavior: "smooth",
             overflow: "hidden",
@@ -114,6 +130,64 @@ const OurGenresSlider = () => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Small Screen Layout: Show One Genre at a Time */}
+      <div className="md:hidden flex flex-col items-center">
+        <div className="relative w-full max-w-xs overflow-hidden">
+          {genres.map((genre, index) => (
+            <div
+              key={genre.id}
+              className={`${
+                index === currentIndex ? "block" : "hidden"
+              } w-full bg-[#1a1a1a] p-2 rounded-lg relative`}
+            >
+              {/* Movie Thumbnails */}
+              <div className="grid grid-cols-2 gap-1">
+                {genreMovies[genre.id]?.map((movie) => (
+                  <img
+                    key={movie.id}
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="rounded-md"
+                  />
+                ))}
+              </div>
+
+              {/* Genre Name & Arrow */}
+              <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-black bg-opacity-60 p-2 rounded-md">
+                <h3 className="text-white text-lg">{genre.name}</h3>
+                <span className="text-white text-xl">➜</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Navigation Buttons Below the Genre Box on Small Screens */}
+        <div className="flex space-x-4 mt-4">
+          <button
+            onClick={handleSmallScreenLeft}
+            disabled={currentIndex === 0}
+            className={`w-10 h-10 bg-black rounded-full flex justify-center items-center text-white border border-gray-600 ${
+              currentIndex === 0
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:border-red-600"
+            } transition-all`}
+          >
+            ◀
+          </button>
+          <button
+            onClick={handleSmallScreenRight}
+            disabled={currentIndex === genres.length - 1}
+            className={`w-10 h-10 bg-black rounded-full flex justify-center items-center text-white border border-gray-600 ${
+              currentIndex === genres.length - 1
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:border-red-600"
+            } transition-all`}
+          >
+            ▶
+          </button>
         </div>
       </div>
     </section>
