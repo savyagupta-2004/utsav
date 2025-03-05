@@ -12,12 +12,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white py-10 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-6 gap-6 border-b border-gray-600 pb-6">
+    <footer className="bg-[#0f0f0f] text-white pt-28 pb-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-6 border-b border-gray-600 pb-6">
         {/* Home Section */}
         <div>
           <h3 className="text-lg font-bold">Home</h3>
-          <ul className="mt-2 text-gray-400 space-y-1">
+          <ul className="mt-2 text-gray-400 space-y-3">
             <li>
               <button
                 onClick={() => scrollToSection("categories")}
@@ -56,7 +56,7 @@ const Footer = () => {
         {/* Movies Section */}
         <div>
           <h3 className="text-lg font-bold">Movies</h3>
-          <ul className="mt-2 text-gray-400 space-y-1">
+          <ul className="mt-2 text-gray-400 space-y-3">
             <li>
               <button
                 onClick={() => scrollToSection("genre")}
@@ -103,7 +103,7 @@ const Footer = () => {
         {/* Shows Section */}
         <div>
           <h3 className="text-lg font-bold">Shows</h3>
-          <ul className="mt-2 text-gray-400 space-y-1">
+          <ul className="mt-2 text-gray-400 space-y-3">
             <li>
               <button
                 onClick={() => scrollToSection("show-genres")}
@@ -142,7 +142,7 @@ const Footer = () => {
         {/* Support Section */}
         <div>
           <h3 className="text-lg font-bold">Support</h3>
-          <ul className="mt-2 text-gray-400 space-y-1">
+          <ul className="mt-2 text-gray-400 space-y-3">
             <li>
               <button
                 onClick={() => scrollToSection("contact")}
@@ -157,7 +157,7 @@ const Footer = () => {
         {/* Subscription Section */}
         <div>
           <h3 className="text-lg font-bold">Subscription</h3>
-          <ul className="mt-2 text-gray-400 space-y-1">
+          <ul className="mt-2 text-gray-400 space-y-3">
             <li>
               <button
                 onClick={() => scrollToSection("plans")}

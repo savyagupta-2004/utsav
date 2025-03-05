@@ -49,13 +49,15 @@ const Navbar = ({ setSearchResults }) => {
   };
 
   return (
-    <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 z-50">
+    <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-5  z-50">
       {/* Left: Logo */}
-      <div className="flex items-center">
+      <div className="flex items-center h-16 overflow-hidden">
+        {" "}
+        {/* Fixed navbar height */}
         <img
           src="../Images/logo.png"
           alt="Utsav Logo"
-          className="h-[10rem] w-[10rem] cursor-pointer"
+          className="h-[20rem] w-auto max-w-[195px] object-contain flex-shrink-0 cursor-pointer"
           onClick={() => handleScroll("home")}
         />
       </div>

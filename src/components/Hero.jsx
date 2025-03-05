@@ -10,7 +10,7 @@ const containerImages = [
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full h-screen bg-black text-white">
+    <section className="relative w-full h-screen  bg-[#141414] text-white">
       {/* Navbar - Overlays on Top */}
       <Navbar />
 

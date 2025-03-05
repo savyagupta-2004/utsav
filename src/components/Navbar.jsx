@@ -49,18 +49,16 @@ const Navbar = ({ setSearchResults = () => {} }) => {
 
   return (
     <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-4 z-50">
-      {/* Left: Logo */}
-      <div className="flex items-center">
+      <div className="flex items-center h-16 overflow-hidden">
         <img
           src="../Images/logo.png"
           alt="Utsav Logo"
-          className="lg:h-[9rem] lg:w-[9rem] md:h-[8rem] md:w-[8rem] sm:h-[6rem] sm:w-[6rem] w-[5rem] h-[5rem] cursor-pointer"
+          className="h-[20rem] w-auto max-w-[195px] object-contain flex-shrink-0 cursor-pointer"
           onClick={() => handleScroll("home")}
         />
       </div>
 
-      {/* Center: Navigation Menu (Perfectly Centered) */}
-      <div className="hidden lg:flex items-center border-4 border-[#1a1a1a] bg-black bg-opacity-70 rounded-lg px-6 py-3 space-x-6 text-white font-medium absolute left-1/2 transform -translate-x-1/2">
+      <div className="hidden lg:flex items-center border-4 border-[#1a1a1a] bg-[#141414] bg-opacity-70 rounded-lg px-6 py-3 space-x-6 text-white font-medium absolute left-1/2 transform -translate-x-1/2">
         <a
           onClick={() => handleScroll("upcoming")}
           className="hover:text-gray-400 cursor-pointer"
@@ -87,9 +85,14 @@ const Navbar = ({ setSearchResults = () => {} }) => {
         </a>
       </div>
 
-      {/* Right: Search & Notifications */}
       <div className="flex items-center space-x-6">
-        {/* Search Button (Visible on Large Screens) */}
+        <button
+          onClick={() => setShowSidebar(!showSidebar)}
+          className="lg:hidden text-white text-2xl"
+        >
+          ☰
+        </button>
+
         <button
           onClick={() => setShowSearch(!showSearch)}
           className="hidden lg:block"
@@ -101,7 +104,6 @@ const Navbar = ({ setSearchResults = () => {} }) => {
           />
         </button>
 
-        {/* Search Input (Only Shows When Search Button is Clicked) */}
         {showSearch && (
           <div className="relative hidden lg:block">
             <form onSubmit={handleSearch} className="relative">
@@ -119,34 +121,23 @@ const Navbar = ({ setSearchResults = () => {} }) => {
                 🔍
               </button>
             </form>
-            {searchResults.length > 0 && (
-              <div className="absolute bg-[#141414] text-white mt-2 w-full rounded-lg shadow-lg p-3 max-h-60 overflow-y-auto">
-                {searchResults.map((movie) => (
-                  <div
-                    key={movie.id}
-                    className="p-2 hover:bg-gray-700 cursor-pointer"
-                    onClick={() => handleMovieClick(movie.id)}
-                  >
-                    {movie.title}
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         )}
 
-        {/* Sidebar Toggle Button (Mobile Menu) */}
         <button
-          className="lg:hidden text-white text-2xl"
-          onClick={() => setShowSidebar(!showSidebar)}
+          onClick={() => setShowNotifications(!showNotifications)}
+          className="hidden lg:block"
         >
-          ☰
+          <img
+            src="../Images/noti.png"
+            alt="Notifications"
+            className="h-6 cursor-pointer"
+          />
         </button>
 
-        {/* Sidebar (Mobile Navigation) */}
         <div
-          className={`fixed top-0 right-0 h-full w-64 bg-black bg-opacity-90 text-white transform ${
-            showSidebar ? "translate-x-0" : "translate-x-full"
+          className={`fixed top-0 right-0 h-screen w-64 bg-[#141414] bg-opacity-90 text-white transform ${
+            showSidebar ? "translate-x-0" : "translate-x-[100%]"
           } transition-transform duration-300 ease-in-out lg:hidden p-6`}
         >
           <button
@@ -182,55 +173,24 @@ const Navbar = ({ setSearchResults = () => {} }) => {
             </a>
           </nav>
 
-          {/* Sidebar Search (Only for Mobile) */}
           <div className="mt-6">
-            <button
-              onClick={() => setShowSearch(!showSearch)}
-              className="hidden lg:block"
-            >
-              <img
-                src="../Images/search.png"
-                alt="Search"
-                className="h-6 cursor-pointer"
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search movies..."
+                className="px-4 py-2 rounded-full bg-[#141414] text-white outline-none"
               />
-            </button>
-
-            {/* Search Input (Only Shows When Search Button is Clicked) */}
-            {showSearch && (
-              <div className="relative hidden lg:block">
-                <form onSubmit={handleSearch} className="relative">
-                  <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search movies..."
-                    className="px-4 py-2 rounded-full bg-[#141414] text-white outline-none"
-                  />
-                  <button
-                    type="submit"
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
-                  >
-                    🔍
-                  </button>
-                </form>
-                {searchResults.length > 0 && (
-                  <div className="absolute bg-[#141414] text-white mt-2 w-full rounded-lg shadow-lg p-3 max-h-60 overflow-y-auto">
-                    {searchResults.map((movie) => (
-                      <div
-                        key={movie.id}
-                        className="p-2 hover:bg-gray-700 cursor-pointer"
-                        onClick={() => handleMovieClick(movie.id)}
-                      >
-                        {movie.title}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
+              <button
+                type="submit"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+              >
+                🔍
+              </button>
+            </form>
           </div>
 
-          {/* Sidebar Notifications (Only for Mobile) */}
           <div className="mt-6">
             <h3 className="font-bold">Notifications</h3>
             <ul>
@@ -246,44 +206,6 @@ const Navbar = ({ setSearchResults = () => {} }) => {
             </ul>
           </div>
         </div>
-
-        {/* Notifications Button (Visible on Large Screens) */}
-        <button
-          onClick={() => setShowNotifications(!showNotifications)}
-          className="hidden lg:block"
-        >
-          <img
-            src="../Images/noti.png"
-            alt="Notifications"
-            className="h-6 cursor-pointer"
-          />
-        </button>
-
-        {/* Notification Dropdown (For Large Screens) */}
-        {showNotifications && (
-          <div className="absolute right-0 mt-20 w-64 bg-[#141414] bg-opacity-90 text-white rounded-lg shadow-lg p-3 hidden lg:block">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="font-bold">Notifications</h3>
-              <button
-                onClick={() => setShowNotifications(false)}
-                className="text-white text-xl"
-              >
-                ✕
-              </button>
-            </div>
-            <ul>
-              {notifications.length > 0 ? (
-                notifications.map((note, index) => (
-                  <li key={index} className="border-b border-gray-700 py-2">
-                    {note}
-                  </li>
-                ))
-              ) : (
-                <li className="text-gray-400">No new notifications</li>
-              )}
-            </ul>
-          </div>
-        )}
       </div>
     </div>
   );

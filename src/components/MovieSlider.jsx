@@ -89,8 +89,8 @@ const MovieSlider = ({ movies, title }) => {
   return (
     <section className="px-4 md:px-6 py-6">
       <div className="flex justify-between items-center mb-4 ">
-        <h2 className="text-xl md:text-2xl font-bold text-white">{title}</h2>
-        <div className="hidden md:flex items-center space-x-3 p-2 bg-black rounded-2xl">
+        <h2 className="text-xl md:text-3xl font-bold text-white">{title}</h2>
+        <div className="hidden md:flex items-center space-x-3 p-2 bg-[#141414] rounded-2xl">
           <button
             onClick={scrollLeft}
             className="w-10 md:w-12 h-10 md:h-12 bg-[#141414] border-2 border-[#1a1a1a] rounded-lg flex justify-center items-center text-white   hover:border-red-600 transition-all"
@@ -243,7 +243,7 @@ const MovieSlider = ({ movies, title }) => {
                     </div>
                   ) : (
                     // Show "Released at" for Popular Picks & Latest on Utsav
-                    <p className="text-gray-400 text-[9px] md:text-sm mt-1 bg-black p-1 rounded-md text-center">
+                    <p className="text-gray-400 text-[9px] md:text-sm mt-1 bg-[#141414] p-1 rounded-md text-center">
                       Released at {formatReleaseDate(movie.release_date)}
                     </p>
                   )}
@@ -258,7 +258,7 @@ const MovieSlider = ({ movies, title }) => {
           <button
             onClick={scrollLeft}
             disabled={currentIndex === 0}
-            className={`w-10 h-10 bg-black rounded-full flex justify-center items-center text-white border border-gray-600 ${
+            className={`w-10 h-10 bg-[#141414] rounded-full flex justify-center items-center text-white border border-gray-600 ${
               currentIndex === 0
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:border-red-600"
@@ -269,7 +269,7 @@ const MovieSlider = ({ movies, title }) => {
           <button
             onClick={scrollRight}
             disabled={currentIndex === movies.length - 1}
-            className={`w-10 h-10 bg-black rounded-full flex justify-center items-center text-white border border-gray-600 ${
+            className={`w-10 h-10 bg-[#141414] rounded-full flex justify-center items-center text-white border border-gray-600 ${
               currentIndex === movies.length - 1
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:border-red-600"
@@ -295,7 +295,7 @@ const MovieSlider = ({ movies, title }) => {
           {movies.map((movie, index) => (
             <div
               key={movie.id}
-              className={`min-w-[160px] md:min-w-[200px] lg:min-w-[250px] bg-[#1a1a1a] py-6 px-6 rounded-lg cursor-pointer hover:scale-105 transition-transform border-1 border-[#262626]`}
+              className="min-w-[160px] min-h-[160px] md:min-w-[200px] md:min-h-[200px] lg:min-w-[250px] lg:min-h-[250px]  bg-[#1a1a1a] py-6 px-6 rounded-lg cursor-pointer hover:scale-105 transition-transform border-1 border-[#262626]"
               style={{
                 display: title === "Top Rated" ? "inline-block" : "block",
               }}
@@ -309,7 +309,7 @@ const MovieSlider = ({ movies, title }) => {
                 {title === "Upcoming Bangers" ? (
                   // Show Duration & Views for "Upcoming Bangers"
                   <div className="flex  justify-between items-center text-gray-400 text-[8px] md:text-sm mt-1">
-                    <div className="border-[#262626] border-2  flex items-center space-x-1  rounded-xl bg-black p-1">
+                    <div className="border-[#262626] border-2  flex items-center space-x-1  rounded-xl bg-[#141414] p-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -331,7 +331,7 @@ const MovieSlider = ({ movies, title }) => {
                           : "N/A"}
                       </span>
                     </div>
-                    <div className="flex border-[#262626] border-2 items-center space-x-1  rounded-xl bg-black p-1">
+                    <div className="flex border-[#262626] border-2 items-center space-x-1  rounded-xl bg-[#141414] p-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -353,7 +353,7 @@ const MovieSlider = ({ movies, title }) => {
                 ) : title === "Top Rated" ? (
                   // Show Duration & Star Rating for "Top Rated"
                   <div className="flex justify-between items-center text-gray-400 text-xs md:text-[10px] mt-1">
-                    <div className="border-[#262626] border-2 flex items-center space-x-1  rounded-xl bg-black p-1">
+                    <div className="border-[#262626] border-2 flex items-center space-x-1  rounded-xl bg-[#141414] p-1">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -375,7 +375,7 @@ const MovieSlider = ({ movies, title }) => {
                           : "N/A"}
                       </span>
                     </div>
-                    <div className="flex items-center space-x-1 mt-1  rounded-xl bg-black p-1">
+                    <div className="flex items-center space-x-1 mt-1  rounded-xl bg-[#141414] p-1">
                       <div className="flex space-x-1">
                         {[...Array(5)].map((_, i) => (
                           <svg
@@ -403,7 +403,7 @@ const MovieSlider = ({ movies, title }) => {
                   </div>
                 ) : (
                   // Show "Released at" for Popular Picks & Latest on Utsav
-                  <p className="border-[#262626] border-2 text-gray-400 text-[12px] mt-1 bg-black p-1 rounded-md text-center">
+                  <p className="border-[#262626] border-2 text-gray-400 text-[12px] mt-1 bg-[#141414] p-1 rounded-md text-center">
                     Released at {formatReleaseDate(movie.release_date)}
                   </p>
                 )}

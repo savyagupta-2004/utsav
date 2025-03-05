@@ -71,7 +71,7 @@ const OurGenresSlider = () => {
   return (
     <section className="px-6 py-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-white">Our Genres</h2>
+        <h2 className="text-3xl font-bold text-white">Our Genres</h2>
       </div>
 
       {/* Large Screen Layout */}
@@ -160,7 +160,7 @@ const OurGenresSlider = () => {
           <button
             onClick={handleSmallScreenLeft}
             disabled={currentIndex === 0}
-            className={`w-10 h-10 bg-black rounded-full flex justify-center items-center text-white border border-gray-600 ${
+            className={`w-10 h-10 bg-[#141414] rounded-full flex justify-center items-center text-white border border-gray-600 ${
               currentIndex === 0
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:border-red-600"
@@ -171,7 +171,7 @@ const OurGenresSlider = () => {
           <button
             onClick={handleSmallScreenRight}
             disabled={currentIndex === genres.length - 1}
-            className={`w-10 h-10 bg-black rounded-full flex justify-center items-center text-white border border-gray-600 ${
+            className={`w-10 h-10 bg-[#141414] rounded-full flex justify-center items-center text-white border border-gray-600 ${
               currentIndex === genres.length - 1
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:border-red-600"
