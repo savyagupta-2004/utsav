@@ -71,7 +71,9 @@ const OurGenresSlider = () => {
   return (
     <section className="px-6 py-8">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-3xl font-bold text-white">Our Genres</h2>
+        <h2 className="md:text-3xl text-xl  font-bold text-white">
+          Our Genres
+        </h2>
       </div>
 
       {/* Large Screen Layout */}
