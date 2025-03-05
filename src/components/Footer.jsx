@@ -12,7 +12,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-[#0f0f0f] text-white pt-28 pb-6">
+    <footer className="bg-[#0f0f0f] text-white pt-28 pb-6 px-4 sm:px-10 w-full">
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-6 border-b border-gray-600 pb-6">
         {/* Home Section */}
         <div>
