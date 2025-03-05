@@ -75,7 +75,7 @@ const MovieDetails = () => {
             src={
               movie.backdrop_path
                 ? `${BACKDROP_BASE_URL}${movie.backdrop_path}`
-                : "/fallback-hero.jpg"
+                : "../Images/fallback-profile.jpg"
             }
             alt={movie.title}
             fill
@@ -83,6 +83,7 @@ const MovieDetails = () => {
             className="absolute object-cover"
             unoptimized
           />
+
           <div className="absolute flex flex-col items-center text-center">
             <h1 className="text-5xl font-bold drop-shadow-lg">{movie.title}</h1>
             <p className="text-lg text-gray-300 max-w-2xl drop-shadow-md">
@@ -122,7 +123,7 @@ const MovieDetails = () => {
                         src={
                           actor.profile_path
                             ? `${IMAGE_BASE_URL}${actor.profile_path}`
-                            : "/fallback-profile.jpg"
+                            : "../Images/fallback-profile.jpg"
                         }
                         alt={actor.name}
                         width={80}
@@ -130,6 +131,7 @@ const MovieDetails = () => {
                         className="rounded-xl"
                         unoptimized
                       />
+
                       <p className="text-gray-300 text-sm mt-2">{actor.name}</p>
                     </div>
                   ))}
@@ -158,7 +160,7 @@ const MovieDetails = () => {
                             src={
                               review.author_details.avatar_path
                                 ? `${IMAGE_BASE_URL}${review.author_details.avatar_path}`
-                                : "/fallback-profile.jpg"
+                                : "../Images/fallback-profile.jpg"
                             }
                             alt={review.author}
                             width={40}
@@ -166,6 +168,7 @@ const MovieDetails = () => {
                             className="rounded-full"
                             unoptimized
                           />
+
                           <div>
                             <p className="text-gray-300 font-semibold">
                               {review.author}
@@ -237,7 +240,7 @@ const MovieDetails = () => {
                         src={
                           director.profile_path
                             ? `${IMAGE_BASE_URL}${director.profile_path}`
-                            : "/fallback-profile.jpg"
+                            : "../Images/fallback-profile.jpg"
                         }
                         alt={director.name}
                         width={60}
@@ -245,6 +248,7 @@ const MovieDetails = () => {
                         className="rounded-xs"
                         unoptimized
                       />
+
                       <div>
                         <p className="text-white text-lg font-semibold">
                           {director.name}
@@ -276,7 +280,7 @@ const MovieDetails = () => {
                         src={
                           composer.profile_path
                             ? `${IMAGE_BASE_URL}${composer.profile_path}`
-                            : "/fallback-profile.jpg"
+                            : "../Images/fallback-profile.jpg"
                         }
                         alt={composer.name}
                         width={60}
@@ -284,6 +288,7 @@ const MovieDetails = () => {
                         className="rounded-xs"
                         unoptimized
                       />
+
                       <div>
                         <p className="text-white text-lg font-semibold">
                           {composer.name}
