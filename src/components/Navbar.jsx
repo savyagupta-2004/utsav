@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import axios from "axios";
-
+import { useRouter } from "next/navigation";
 const API_KEY = "db75be3f6da59e6c54d0b9f568d19d16";
 const SEARCH_URL = "https://api.themoviedb.org/3/search/movie";
 
 const Navbar = ({ setSearchResults = () => {} }) => {
+  const router = useRouter();
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -15,8 +16,9 @@ const Navbar = ({ setSearchResults = () => {} }) => {
   };
 
   const [query, setQuery] = useState("");
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [searchResults, setSearchResultsLocal] = useState([]);
   const [showSearch, setShowSearch] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([
     "New movie releases this week!",
@@ -32,15 +34,17 @@ const Navbar = ({ setSearchResults = () => {} }) => {
       const response = await axios.get(SEARCH_URL, {
         params: { api_key: API_KEY, query },
       });
-
+      setSearchResultsLocal(response.data.results);
       if (typeof setSearchResults === "function") {
         setSearchResults(response.data.results);
-      } else {
-        console.warn("setSearchResults is not provided");
       }
     } catch (error) {
       console.error("Error fetching search results:", error);
     }
+  };
+
+  const handleMovieClick = (movieId) => {
+    router.push(`/${movieId}`);
   };
 
   return (
@@ -99,21 +103,36 @@ const Navbar = ({ setSearchResults = () => {} }) => {
 
         {/* Search Input (Only Shows When Search Button is Clicked) */}
         {showSearch && (
-          <form onSubmit={handleSearch} className="relative hidden lg:block">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search movies..."
-              className="px-4 py-2 rounded-full bg-gray-800 text-white outline-none"
-            />
-            <button
-              type="submit"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
-            >
-              🔍
-            </button>
-          </form>
+          <div className="relative hidden lg:block">
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search movies..."
+                className="px-4 py-2 rounded-full bg-[#141414] text-white outline-none"
+              />
+              <button
+                type="submit"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+              >
+                🔍
+              </button>
+            </form>
+            {searchResults.length > 0 && (
+              <div className="absolute bg-[#141414] text-white mt-2 w-full rounded-lg shadow-lg p-3 max-h-60 overflow-y-auto">
+                {searchResults.map((movie) => (
+                  <div
+                    key={movie.id}
+                    className="p-2 hover:bg-gray-700 cursor-pointer"
+                    onClick={() => handleMovieClick(movie.id)}
+                  >
+                    {movie.title}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         )}
 
         {/* Sidebar Toggle Button (Mobile Menu) */}
@@ -165,21 +184,50 @@ const Navbar = ({ setSearchResults = () => {} }) => {
 
           {/* Sidebar Search (Only for Mobile) */}
           <div className="mt-6">
-            <form onSubmit={handleSearch} className="relative">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search movies..."
-                className="w-full px-4 py-2 rounded-full bg-gray-800 text-white outline-none"
+            <button
+              onClick={() => setShowSearch(!showSearch)}
+              className="hidden lg:block"
+            >
+              <img
+                src="../Images/search.png"
+                alt="Search"
+                className="h-6 cursor-pointer"
               />
-              <button
-                type="submit"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
-              >
-                🔍
-              </button>
-            </form>
+            </button>
+
+            {/* Search Input (Only Shows When Search Button is Clicked) */}
+            {showSearch && (
+              <div className="relative hidden lg:block">
+                <form onSubmit={handleSearch} className="relative">
+                  <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search movies..."
+                    className="px-4 py-2 rounded-full bg-[#141414] text-white outline-none"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white"
+                  >
+                    🔍
+                  </button>
+                </form>
+                {searchResults.length > 0 && (
+                  <div className="absolute bg-[#141414] text-white mt-2 w-full rounded-lg shadow-lg p-3 max-h-60 overflow-y-auto">
+                    {searchResults.map((movie) => (
+                      <div
+                        key={movie.id}
+                        className="p-2 hover:bg-gray-700 cursor-pointer"
+                        onClick={() => handleMovieClick(movie.id)}
+                      >
+                        {movie.title}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Sidebar Notifications (Only for Mobile) */}
@@ -213,8 +261,16 @@ const Navbar = ({ setSearchResults = () => {} }) => {
 
         {/* Notification Dropdown (For Large Screens) */}
         {showNotifications && (
-          <div className="absolute right-0 mt-2 w-64 bg-gray-800 bg-opacity-90 text-white rounded-lg shadow-lg p-3 hidden lg:block">
-            <h3 className="font-bold">Notifications</h3>
+          <div className="absolute right-0 mt-20 w-64 bg-[#141414] bg-opacity-90 text-white rounded-lg shadow-lg p-3 hidden lg:block">
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="font-bold">Notifications</h3>
+              <button
+                onClick={() => setShowNotifications(false)}
+                className="text-white text-xl"
+              >
+                ✕
+              </button>
+            </div>
             <ul>
               {notifications.length > 0 ? (
                 notifications.map((note, index) => (
