@@ -53,7 +53,6 @@ const Navbar = ({ setSearchResults }) => {
       {/* Left: Logo */}
       <div className="flex items-center h-16 overflow-hidden">
         {" "}
-        {/* Fixed navbar height */}
         <img
           src="../Images/logo.png"
           alt="Utsav Logo"

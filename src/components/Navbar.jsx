@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+
 const API_KEY = "db75be3f6da59e6c54d0b9f568d19d16";
 const SEARCH_URL = "https://api.themoviedb.org/3/search/movie";
 
@@ -59,6 +60,12 @@ const Navbar = ({ setSearchResults = () => {} }) => {
       </div>
 
       <div className="hidden lg:flex items-center border-4 border-[#1a1a1a] bg-[#141414] bg-opacity-70 rounded-lg px-6 py-3 space-x-6 text-white font-medium absolute left-1/2 transform -translate-x-1/2">
+        <a
+          onClick={() => router.push("/")}
+          className="hover:text-gray-400 cursor-pointer"
+        >
+          Home
+        </a>
         <a
           onClick={() => handleScroll("upcoming")}
           className="hover:text-gray-400 cursor-pointer"
@@ -147,6 +154,12 @@ const Navbar = ({ setSearchResults = () => {} }) => {
             ✕
           </button>
           <nav className="flex flex-col space-y-4">
+            <a
+              onClick={() => router.push("/")}
+              className="hover:text-gray-400 cursor-pointer"
+            >
+              Home
+            </a>
             <a
               onClick={() => handleScroll("upcoming")}
               className="cursor-pointer"
