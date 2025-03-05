@@ -12,7 +12,7 @@ const MoviesSection = () => {
 
   return (
     <>
-      <div className="lg:px-40 md:px-36 sm:px-32 px-14 ">
+      <div className="lg:px-40 md:px-32 sm:px-28 px-6">
         <div className="border-2 rounded-2xl border-[#262626]  bg-[#141413] mt-20 mb-20">
           <section id="genre">
             <OurGenresSlider />
