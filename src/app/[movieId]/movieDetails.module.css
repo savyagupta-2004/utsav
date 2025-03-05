@@ -1,0 +1,42 @@
+.container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .banner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .details {
+    text-align: left;
+  }
+  
+  .details h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .details p {
+    margin: 5px 0;
+  }
+  
+  .reviews, .similarMovies {
+    margin-top: 30px;
+  }
+  
+  .reviewCard, .movieCard {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .grid {
+    display: flex;
+    gap: 15px;
+    overflow-x: scroll;
+  }
+  

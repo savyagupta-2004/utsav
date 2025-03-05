@@ -1,0 +1,123 @@
+"use client";
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+
+const API_KEY = "db75be3f6da59e6c54d0b9f568d19d16";
+const BASE_URL = "https://api.themoviedb.org/3";
+
+const OurGenresSlider = () => {
+  const [genres, setGenres] = useState([]);
+  const [genreMovies, setGenreMovies] = useState({});
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/genre/movie/list`, {
+          params: { api_key: API_KEY, language: "en-US" },
+        });
+
+        const fetchedGenres = response.data.genres.slice(0, 5); // Show only first 5 genres
+        setGenres(fetchedGenres);
+
+        // Fetch movies for each genre
+        const moviePromises = fetchedGenres.map(async (genre) => {
+          const moviesResponse = await axios.get(`${BASE_URL}/discover/movie`, {
+            params: {
+              api_key: API_KEY,
+              language: "en-US",
+              with_genres: genre.id,
+              page: 1,
+            },
+          });
+          return { [genre.id]: moviesResponse.data.results.slice(0, 4) }; // Only 4 movies per genre
+        });
+
+        const moviesByGenre = await Promise.all(moviePromises);
+        setGenreMovies(Object.assign({}, ...moviesByGenre));
+      } catch (error) {
+        console.error("Error fetching genres or movies:", error);
+      }
+    };
+
+    fetchGenres();
+  }, []);
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <section className="px-6 py-8">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-white">Our Genres</h2>
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={scrollLeft}
+            className="w-12 h-12 bg-black rounded-lg flex justify-center items-center text-white border border-gray-600 hover:border-red-600 transition-all"
+          >
+            ◀
+          </button>
+          <div className="flex items-center space-x-1">
+            <div className="h-1 w-6 rounded-full bg-red-500"></div>
+            <div className="h-1 w-6 rounded-full bg-gray-600"></div>
+            <div className="h-1 w-6 rounded-full bg-gray-600"></div>
+          </div>
+          <button
+            onClick={scrollRight}
+            className="w-12 h-12 bg-black rounded-lg flex justify-center items-center text-white border border-gray-600 hover:border-red-600 transition-all"
+          >
+            ▶
+          </button>
+        </div>
+      </div>
+
+      <div className="relative">
+        <div
+          ref={sliderRef}
+          className="flex space-x-4 overflow-x-scroll scrollbar-hide scroll-smooth"
+          style={{
+            scrollBehavior: "smooth",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {genres.map((genre) => (
+            <div
+              key={genre.id}
+              className="min-w-[200px] md:min-w-[250px] lg:min-w-[300px] bg-[#1a1a1a] p-2 rounded-lg relative"
+            >
+              {/* Movie Thumbnails */}
+              <div className="grid grid-cols-2 gap-1">
+                {genreMovies[genre.id]?.map((movie) => (
+                  <img
+                    key={movie.id}
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="rounded-md"
+                  />
+                ))}
+              </div>
+
+              {/* Genre Name & Arrow */}
+              <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-black bg-opacity-60 p-2 rounded-md">
+                <h3 className="text-white text-lg">{genre.name}</h3>
+                <span className="text-white text-xl">➜</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default OurGenresSlider;
