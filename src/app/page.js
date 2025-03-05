@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function Home() {
   const [searchResults, setSearchResults] = useState([]);
   return (
-    <div className="relative w-full min-h-screen flex flex-col  text-white">
+    <div className="relative w-full min-h-screen flex flex-col bg-[#141413] text-white">
       {/* Navbar - Positioned Absolutely Over Hero Section */}
       <div className="absolute top-0 left-0 w-full z-50">
         <Navbar setSearchResults={setSearchResults} />

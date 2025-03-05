@@ -194,7 +194,8 @@ const Footer = () => {
               <FaTwitter className="text-white" />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/utsavapp/posts/?feedView=all"
+              target="blank"
               className="bg-gray-700 p-2 rounded-lg hover:bg-gray-500 transition"
             >
               <FaLinkedinIn className="text-white" />
@@ -205,7 +206,7 @@ const Footer = () => {
 
       {/* Bottom Footer */}
       <div className="text-center text-gray-400 text-sm mt-6">
-        <p>©2023 Utsav, All Rights Reserved</p>
+        <p>©2025 Utsav, All Rights Reserved</p>
         <div className="flex justify-center space-x-4 mt-2">
           <a href="#" className="hover:underline">
             Terms of Use

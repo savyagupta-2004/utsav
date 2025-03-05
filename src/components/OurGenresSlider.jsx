@@ -72,31 +72,10 @@ const OurGenresSlider = () => {
     <section className="px-6 py-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-white">Our Genres</h2>
-
-        {/* Navigation for Large Screens */}
-        {/* <div className="hidden md:flex items-center space-x-4">
-          <button
-            onClick={scrollLeft}
-            className="w-12 h-12 bg-black rounded-lg flex justify-center items-center text-white border border-gray-600 hover:border-red-600 transition-all"
-          >
-            ◀
-          </button>
-          <div className="flex items-center space-x-1">
-            <div className="h-1 w-6 rounded-full bg-red-500"></div>
-            <div className="h-1 w-6 rounded-full bg-gray-600"></div>
-            <div className="h-1 w-6 rounded-full bg-gray-600"></div>
-          </div>
-          <button
-            onClick={scrollRight}
-            className="w-12 h-12 bg-black rounded-lg flex justify-center items-center text-white border border-gray-600 hover:border-red-600 transition-all"
-          >
-            ▶
-          </button>
-        </div> */}
       </div>
 
       {/* Large Screen Layout */}
-      <div className="relative hidden md:block">
+      <div className="relative hidden md:block ">
         <div
           ref={sliderRef}
           className="flex space-x-4 overflow-x-auto scrollbar-hide scroll-smooth md:grid md:grid-cols-5"
@@ -109,7 +88,7 @@ const OurGenresSlider = () => {
           {genres.map((genre) => (
             <div
               key={genre.id}
-              className="min-w-[200px] md:min-w-[250px] lg:min-w-[300px] bg-[#1a1a1a] p-2 rounded-lg relative"
+              className="min-w-[100px] md:min-w-[150px] lg:min-w-[100px] bg-[#1a1a1a] p-10 rounded-lg relative"
             >
               {/* Movie Thumbnails */}
               <div className="grid grid-cols-2 gap-1">
@@ -124,7 +103,13 @@ const OurGenresSlider = () => {
               </div>
 
               {/* Genre Name & Arrow */}
-              <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-black bg-opacity-60 p-2 rounded-md">
+              <div
+                className="absolute bottom-0 left-0 right-0 p-3 flex justify-between items-center rounded-b-lg"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0))",
+                }}
+              >
                 <h3 className="text-white text-lg">{genre.name}</h3>
                 <span className="text-white text-xl">➜</span>
               </div>
@@ -156,7 +141,13 @@ const OurGenresSlider = () => {
               </div>
 
               {/* Genre Name & Arrow */}
-              <div className="absolute bottom-2 left-2 right-2 flex justify-between items-center bg-black bg-opacity-60 p-2 rounded-md">
+              <div
+                className="absolute bottom-0 left-0 right-0 p-3 flex justify-between items-center rounded-b-lg"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0))",
+                }}
+              >
                 <h3 className="text-white text-lg">{genre.name}</h3>
                 <span className="text-white text-xl">➜</span>
               </div>
