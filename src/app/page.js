@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import MoviesSection from "../components/MoviesSection";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import Form from "@/components/Form";
 
 export default function Home() {
   const [searchResults, setSearchResults] = useState([]);
@@ -21,6 +22,7 @@ export default function Home() {
       </div>
 
       {/* Footer Always at Bottom */}
+      <Form></Form>
       <Footer />
     </div>
   );
